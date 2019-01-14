@@ -21,15 +21,12 @@ public class TestBase {
     public static Properties prop;
     public static WebDriverWait wait;
 
-    public TestBase(WebDriver driver) {
-
-        this.driver = driver;
-        wait = new WebDriverWait(this.driver, 40);
+    public TestBase() {
 
         try {
             prop = new Properties();
             FileInputStream fileInputStream = new FileInputStream(System.getProperty("user.dir")
-                    + "/src/main/java/com/crm/qa/config/config.properties");
+                    + "/src/main/java/com/qa/config/config.properties");
             prop.load(fileInputStream);
         } catch (FileNotFoundException fNException) {
             fNException.printStackTrace();
@@ -52,31 +49,5 @@ public class TestBase {
 
         driver.get(url);
     }
-
-    public WebElement waitForElementToBeVisible(WebElement element) {
-        return wait.until(ExpectedConditions.visibilityOf(element));
-    }
-
-    public WebElement waitForElementToBeVisible(WebElement element, int timeoutInSeconds) {
-        WebDriverWait wait = new WebDriverWait(driver, timeoutInSeconds);
-        return wait.until(ExpectedConditions.visibilityOf(element));
-    }
-
-    public WebElement waitForElementToBeClickable(WebElement element, int timeoutInSeconds) {
-        WebDriverWait wait = new WebDriverWait(driver, timeoutInSeconds);
-        return wait.until(ExpectedConditions.elementToBeClickable(element));
-    }
-
-    public WebElement waitForElementToBeClickable(By by, int timeoutInSeconds) {
-        WebDriverWait wait = new WebDriverWait(driver, timeoutInSeconds);
-        return wait.until(ExpectedConditions.elementToBeClickable(by));
-    }
-
-    public void waitForElementToBeClickable(WebElement element) {
-        wait.until(ExpectedConditions.elementToBeClickable(element));
-    }
-
-    public void waitForElementToBeClickable(By by) {
-        wait.until(ExpectedConditions.elementToBeClickable(by));
-    }
 }
+
