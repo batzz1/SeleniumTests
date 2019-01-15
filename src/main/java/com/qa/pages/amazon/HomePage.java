@@ -8,6 +8,8 @@ import org.openqa.selenium.support.PageFactory;
 
 public class HomePage extends BasePage {
 
+
+
     @FindBy(id = "twotabsearchtextbox")
     private WebElement searchBar;
 
@@ -17,5 +19,16 @@ public class HomePage extends BasePage {
     public HomePage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
+    }
+
+    public String getPageTitle(){
+        return driver.getTitle();
+    }
+
+    public SearchResultsPage searchItem(String itemName) {
+        waitForElementToBeVisible(searchBar);
+        searchBar.sendKeys(itemName);
+        searchBtn.click();
+        return new SearchResultsPage(driver);
     }
 }

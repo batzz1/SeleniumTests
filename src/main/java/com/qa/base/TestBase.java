@@ -1,13 +1,12 @@
 package com.qa.base;
 
 import com.qa.util.TestUtil;
+import com.qa.util.WebDriverListener;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.openqa.selenium.support.events.WebDriverEventListener;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -19,7 +18,8 @@ public class TestBase {
 
     public static WebDriver driver;
     public static Properties prop;
-    public static WebDriverWait wait;
+    public static EventFiringWebDriver eventFiringWebDriver;
+    public static WebDriverEventListener eventListener;
 
     public TestBase() {
 
@@ -42,6 +42,10 @@ public class TestBase {
             driver = new ChromeDriver();
         }
 
+        eventFiringWebDriver = new EventFiringWebDriver(driver);
+        eventListener = new WebDriverListener();
+        eventFiringWebDriver.register(eventListener);
+        driver = eventFiringWebDriver;
         driver.manage().window().maximize();
         driver.manage().deleteAllCookies();
         driver.manage().timeouts().pageLoadTimeout(TestUtil.PAGE_LOAD_TIMEOUT, TimeUnit.SECONDS);

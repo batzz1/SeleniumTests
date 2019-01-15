@@ -1,0 +1,11 @@
+<suite name ="Selenium Assignment">
+
+    <test name="Sanity Test">
+        <listeners>
+            <listener class-name="com.qa.ExtentReportListener.ExtentReporterNG"></listener>
+        </listeners>
+        <classes>
+            <class name="com.qa.test.amazon.AmazonTest"></class>
+        </classes>
+    </test>
+</suite>
