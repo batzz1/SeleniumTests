@@ -5,6 +5,7 @@ import com.qa.util.WebDriverListener;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.events.WebDriverEventListener;
 
@@ -21,8 +22,10 @@ public class TestBase {
     public static EventFiringWebDriver eventFiringWebDriver;
     public static WebDriverEventListener eventListener;
 
+    /**
+     * Constructor is used to Initialize property
+     */
     public TestBase() {
-
         try {
             prop = new Properties();
             FileInputStream fileInputStream = new FileInputStream(System.getProperty("user.dir")
@@ -35,11 +38,21 @@ public class TestBase {
         }
     }
 
+    /**
+     * Start Browser, No need to mention ChromeDriver or FireFox Driver Path
+     *
+     * @param url
+     */
     public static void initialization(String url) {
+
         String browser = prop.getProperty("browser");
+        WebDriverManager.chromedriver().setup();
         if (browser.equals("chrome")) {
             WebDriverManager.chromedriver().setup();
             driver = new ChromeDriver();
+        } else if (browser.equals("firefox")) {
+            WebDriverManager.firefoxdriver().setup();
+            driver = new FirefoxDriver();
         }
 
         eventFiringWebDriver = new EventFiringWebDriver(driver);

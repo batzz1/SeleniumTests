@@ -6,6 +6,7 @@
         </listeners>
         <classes>
             <class name="com.qa.test.amazon.AmazonTest"></class>
+            <class name="com.qa.test.cleartrip.ClearTripTest"></class>
         </classes>
     </test>
 </suite>

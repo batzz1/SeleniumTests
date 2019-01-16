@@ -12,6 +12,12 @@ public class ProductPage extends BasePage {
     @FindBy(id = "buy-now-button")
     private WebElement buyNowBtn;
 
+    @FindBy(xpath = "//a[@id='a-autoid-2-announce']")
+    private WebElement kindleEdition;
+
+    @FindBy(id = "checkout-button")
+    private WebElement buyKindleBtn;
+
     public ProductPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
@@ -21,5 +27,13 @@ public class ProductPage extends BasePage {
     public void clickOnBuyNow() {
         waitForElementToBeClickable(buyNowBtn, 20);
         buyNowBtn.click();
+    }
+
+    public void buyKindleEditionOfProduct() {
+        waitForElementToBeClickable(kindleEdition);
+        kindleEdition.click();
+        switchToNewTab();
+        waitForElementToBeClickable(buyKindleBtn);
+        buyKindleBtn.click();
     }
 }

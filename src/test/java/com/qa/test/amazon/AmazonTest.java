@@ -27,13 +27,23 @@ public class AmazonTest extends TestBase {
     }
 
     @Test
-    public void purchaseBookOnAmazon()  {
+    public void purchaseBookOnAmazonTypePaperBack()  {
         String pageTitle = homePage.getPageTitle();
         Assert.assertEquals(pageTitle, Amazon.PAGE_TITLE.getValue());
         searchResultsPage = homePage.searchItem(Amazon.BOOK_TITLE.getValue());
         productPage = searchResultsPage.selectProductFromResults();
         productPage.clickOnBuyNow();
     }
+
+    @Test
+    public void purchaseBookOnAmazonTypeKindle() {
+        String pageTitle = homePage.getPageTitle();
+        Assert.assertEquals(pageTitle, Amazon.PAGE_TITLE.getValue());
+        searchResultsPage = homePage.searchItem(Amazon.BOOK_TITLE.getValue());
+        productPage = searchResultsPage.selectProductFromResults();
+        productPage.buyKindleEditionOfProduct();
+    }
+
 
     @AfterMethod
     public void tearDown() {
