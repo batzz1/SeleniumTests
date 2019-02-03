@@ -26,7 +26,7 @@ public class AmazonTest extends TestBase {
         homePage = new HomePage(driver);
     }
 
-    @Test
+    @Test(priority = 1)
     public void purchaseBookOnAmazonTypePaperBack()  {
         String pageTitle = homePage.getPageTitle();
         Assert.assertEquals(pageTitle, Amazon.PAGE_TITLE.getValue());
@@ -35,7 +35,7 @@ public class AmazonTest extends TestBase {
         productPage.clickOnBuyNow();
     }
 
-    @Test
+    @Test(priority = 2)
     public void purchaseBookOnAmazonTypeKindle() {
         String pageTitle = homePage.getPageTitle();
         Assert.assertEquals(pageTitle, Amazon.PAGE_TITLE.getValue());
